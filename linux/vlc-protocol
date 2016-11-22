@@ -1,0 +1,8 @@
+#!/bin/bash
+url=${1:6}
+echo $url
+if [[ ! $url =~ ^https?:// ]]; then
+  echo "protocol not allowed"
+  exit 1
+fi
+vlc --open "$url"
