@@ -20,10 +20,12 @@
   }
 
   // Launch VLC
-  NSTask *task = [[NSTask alloc] init];
-  task.launchPath = @"/Applications/VLC.app/Contents/MacOS/VLC";
-  task.arguments = @[@"--open", url];
-  [task launch];
+  NSWorkspace *ws = [NSWorkspace sharedWorkspace];
+  NSURL *app = [NSURL fileURLWithPath:@"/Applications/VLC.app"];
+  NSArray *arguments = [NSArray arrayWithObjects: @"--open", url, nil];
+  NSMutableDictionary *config = [[NSMutableDictionary alloc] init];
+  [config setObject:arguments forKey:NSWorkspaceLaunchConfigurationArguments];
+  [ws launchApplicationAtURL:app options:NSWorkspaceLaunchNewInstance configuration:config error:nil];
 
   // Close this program
   [NSApp terminate:nil];
