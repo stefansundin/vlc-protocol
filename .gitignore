@@ -1,5 +1,7 @@
 mac/VLC-protocol-app/Contents/MacOS/vlc-protocol
 *.exe
+*.app
+*.zip
 
 Thumbs.db
 *.DS_Store
