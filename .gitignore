@@ -1,4 +1,4 @@
-mac/VLC-protocol-app/Contents/MacOS/vlc-protocol
+mac/mpv-protocol-app/Contents/MacOS/mpv-protocol
 *.exe
 *.app
 *.zip

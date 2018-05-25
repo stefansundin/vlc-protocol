@@ -1,5 +1,5 @@
 #!/bin/bash -ex
-rm -rf VLC-protocol.app.zip VLC-protocol.app
+rm -rf mpv-protocol.app.zip mpv-protocol.app
 ./build.sh
-cp -r VLC-protocol-app VLC-protocol.app
-zip -r VLC-protocol.app.zip VLC-protocol.app -x '*.DS_Store'
+cp -r mpv-protocol-app mpv-protocol.app
+zip -r mpv-protocol.app.zip mpv-protocol.app -x '*.DS_Store'

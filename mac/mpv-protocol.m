@@ -9,7 +9,7 @@
 - (void)handleAppleEvent:(NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent {
   // Get URL
   NSString *fullUrl = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-  // Strip vlc://
+  // Strip mpv://
   NSString *url = [fullUrl substringWithRange:NSMakeRange(6, [fullUrl length]-6)];
 
   // Only allow urls starting with http:// or https://
@@ -19,10 +19,10 @@
     return;
   }
 
-  // Launch VLC
+  // Launch mpv
   NSWorkspace *ws = [NSWorkspace sharedWorkspace];
-  NSURL *app = [NSURL fileURLWithPath:@"/Applications/VLC.app"];
-  NSArray *arguments = [NSArray arrayWithObjects: @"--open", url, nil];
+  NSURL *app = [NSURL fileURLWithPath:@"/Applications/mpv.app"];
+  NSArray *arguments = [NSArray arrayWithObjects: url, nil];
   NSMutableDictionary *config = [[NSMutableDictionary alloc] init];
   [config setObject:arguments forKey:NSWorkspaceLaunchConfigurationArguments];
   [ws launchApplicationAtURL:app options:NSWorkspaceLaunchNewInstance configuration:config error:nil];
