@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <windows.h>
 #include <shlwapi.h>
+#include <wininet.h>
 
 #define ARRAY_SIZE(x) (sizeof(x) / sizeof((x)[0]))
 
@@ -28,6 +29,11 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
     return 1;
   }
 
+  // Some browsers don't forcibly URL-encode links with unencoded characters, so make sure at least spaces are encoded
+  wchar_t encoded_url[INTERNET_MAX_URL_LENGTH];
+  DWORD buflen = sizeof(encoded_url)/sizeof(wchar_t);
+  UrlEscapeSpaces(url, encoded_url, &buflen);
+
   // Get vlc.exe path
   wchar_t path[MAX_PATH];
   GetModuleFileName(NULL, path, ARRAY_SIZE(path));
@@ -35,9 +41,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine
   wcscat(path, L"\\vlc.exe");
 
   // Assemble arguments
-  wchar_t *args = malloc(sizeof(wchar_t)*(wcslen(pCmdLine)+20));
+  wchar_t *args = malloc(sizeof(wchar_t)*(wcslen(encoded_url)+20));
   wcscpy(args, L"--open \"");
-  wcscat(args, url);
+  wcscat(args, encoded_url);
   wcscat(args, L"\"");
 
   // Start vlc.exe
