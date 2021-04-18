@@ -23,9 +23,16 @@
   NSWorkspace *ws = [NSWorkspace sharedWorkspace];
   NSURL *app = [NSURL fileURLWithPath:@"/Applications/VLC.app"];
   NSArray *arguments = [NSArray arrayWithObjects: @"--open", url, nil];
-  NSMutableDictionary *config = [[NSMutableDictionary alloc] init];
-  [config setObject:arguments forKey:NSWorkspaceLaunchConfigurationArguments];
-  [ws launchApplicationAtURL:app options:NSWorkspaceLaunchNewInstance configuration:config error:nil];
+  NSWorkspaceOpenConfiguration *config = [NSWorkspaceOpenConfiguration alloc];
+  [config setArguments:arguments];
+  [config setCreatesNewApplicationInstance:YES];
+  [ws openApplicationAtURL:app configuration:config completionHandler:^(NSRunningApplication* app, NSError* error) {
+    if (error) {
+      NSLog(@"Failed to open VLC: %@", error.localizedDescription);
+    }
+    exit(1);
+  }];
+  [NSThread sleepForTimeInterval: 10];
 
   // Close this program
   [NSApp terminate:nil];
