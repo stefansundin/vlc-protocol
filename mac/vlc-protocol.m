@@ -23,7 +23,7 @@
   }
 
   // Only allow urls starting with http:// or https://
-  if (!([url hasPrefix:@"http://"] || [url hasPrefix:@"https://"])) {
+  if (![url hasPrefix:@"http://"] && ![url hasPrefix:@"https://"]) {
     // protocol not allowed
     [NSApp terminate:nil];
     return;
