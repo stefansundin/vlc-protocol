@@ -9,14 +9,18 @@
 - (void)handleAppleEvent:(NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent {
   // Get input data
   NSString *input = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
-  if (![input hasPrefix:@"vlc://"]) {
+  NSString *url;
+  if ([input hasPrefix:@"vlc://"]) {
+    url = [input substringFromIndex:6];
+  }
+  else if ([input hasPrefix:@"vlc:"]) {
+    url = [input substringFromIndex:4];
+  }
+  else {
     // invalid input
     [NSApp terminate:nil];
     return;
   }
-
-  // Strip vlc://
-  NSString *url = [input substringFromIndex:6];
 
   // Only allow urls starting with http:// or https://
   if (!([url hasPrefix:@"http://"] || [url hasPrefix:@"https://"])) {
