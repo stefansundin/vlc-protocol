@@ -7,10 +7,16 @@
 @implementation AppDelegate
 
 - (void)handleAppleEvent:(NSAppleEventDescriptor *)event withReplyEvent: (NSAppleEventDescriptor *)replyEvent {
-  // Get URL
-  NSString *fullUrl = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+  // Get input data
+  NSString *input = [[event paramDescriptorForKeyword:keyDirectObject] stringValue];
+  if (![input hasPrefix:@"vlc://"]) {
+    // invalid input
+    [NSApp terminate:nil];
+    return;
+  }
+
   // Strip vlc://
-  NSString *url = [fullUrl substringWithRange:NSMakeRange(6, [fullUrl length]-6)];
+  NSString *url = [input substringFromIndex:6];
 
   // Only allow urls starting with http:// or https://
   if (!([url hasPrefix:@"http://"] || [url hasPrefix:@"https://"])) {
