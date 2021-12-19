@@ -44,13 +44,6 @@ int main() {
                              forEventClass:kInternetEventClass
                                 andEventID:kAEGetURL];
 
-  // I guess we need a window
-  NSWindow *window = [NSWindow alloc];
-  [window initWithContentRect:NSMakeRect(0, 0, 200, 200)
-                    styleMask:NSWindowStyleMaskTitled
-                      backing:NSBackingStoreBuffered
-                        defer:NO];
-
   [NSApp run];
   return 0;
 }
