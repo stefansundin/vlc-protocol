@@ -1,7 +1,7 @@
 ```shell
 sudo cp vlc-protocol /usr/local/bin/
 xdg-desktop-menu install vlc-protocol.desktop
-xdg-open vlc://https://rssbox.herokuapp.com/twitch/watch?url=v102408362
+xdg-open vlc://https://pbs.twimg.com/tweet_video/Cx5L_3FWgAAxzpM.mp4
 ```
 
 To install using curl:
