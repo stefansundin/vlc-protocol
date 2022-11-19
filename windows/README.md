@@ -4,7 +4,7 @@ This is easy to install, but a command line window will pop up briefly when you 
 
 Put the files from the bat directory in your VLC directory (usually `C:\Program Files (x86)\VideoLAN\VLC`), and then run `vlc-protocol-register.bat` as administrator (right-click the file and use _Run as administrator_).
 
-[You can download the repository here.](https://github.com/stefansundin/vlc-protocol/archive/master.zip)
+[You can download the repository here.](https://github.com/stefansundin/vlc-protocol/archive/main.zip)
 
 # Harder exe install
 
